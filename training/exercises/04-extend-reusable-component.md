@@ -11,8 +11,8 @@ Read:
 - `mobile/components/ui/buttons/button.tsx`
 - `mobile/components/ui/feedback/inline-alert.tsx`
 - `mobile/components/ui/display/status-chip.tsx`
-- `dashboard/src/components/ui/data-table.tsx`
-- `dashboard/src/constants/index.ts`
+- `dashboard/src/shared/ui/data-table.tsx`
+- `dashboard/src/shared/constants/index.ts`
 - `docs/design-tokens.md`
 
 ## Task

@@ -21,7 +21,7 @@ By the end, learners can:
 - `mobile/config/app-config.ts`
 - `mobile/constants/spacing.ts`
 - `dashboard/src/app/router.tsx`
-- `dashboard/src/features/journeys/journeys-page.tsx`
+- `dashboard/src/features/journeys/components/journeys-view.tsx`
 - `docs/architecture.md`
 
 ## Real snippets to read aloud

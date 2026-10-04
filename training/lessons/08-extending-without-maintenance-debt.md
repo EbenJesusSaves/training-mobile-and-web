@@ -18,9 +18,9 @@ Learners can:
 - `mobile/app/(app)/(tabs)/index.tsx`
 - `mobile/api/travel-api.ts`
 - `mobile/store/booking-draft-store.ts`
-- `dashboard/src/features/journeys/journeys-page.tsx`
-- `dashboard/src/features/journeys/use-journeys.ts`
-- `dashboard/src/api/journeys.ts`
+- `dashboard/src/features/journeys/components/journeys-view.tsx`
+- `dashboard/src/features/journeys/api/journey-queries.ts`
+- `dashboard/src/features/journeys/api/journeys-api.ts`
 - `backend/src/journeys/dto/search-journeys.dto.ts`
 - `docs/architecture.md`
 
@@ -95,7 +95,7 @@ import { FilterSheet, SORT_TITLES } from '@/features/booking/filter-sheet';
 
 1. Pick a hypothetical change: “first class only” journey filter.
 2. Ask learners to list every layer touched: API DTO, API module type, `useJourneySearch` params/key, draft/screen state, filter UI, empty state, tests.
-3. Compare with dashboard filters in `journeys-page.tsx` and `use-journeys.ts`.
+3. Compare with dashboard filters in `journeys-view.tsx` and `journey-queries.ts`.
 4. Open `backend/src/journeys/dto/search-journeys.dto.ts` to show the backend contract boundary.
 5. Write acceptance criteria before code.
 

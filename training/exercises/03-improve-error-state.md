@@ -12,8 +12,8 @@ Read:
 - `mobile/components/ui/feedback/inline-alert.tsx`
 - `mobile/components/ui/feedback/state-views.tsx`
 - `mobile/app/(app)/checkout.tsx`
-- `dashboard/src/api/errors.ts`
-- `dashboard/src/components/ui/error-state.tsx`
+- `dashboard/src/shared/api/errors.ts`
+- `dashboard/src/shared/ui/error-state.tsx`
 
 ## Task
 

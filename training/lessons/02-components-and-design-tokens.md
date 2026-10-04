@@ -20,9 +20,9 @@ Learners can:
 - `mobile/components/ui/buttons/button.tsx`
 - `mobile/components/ui/display/status-chip.tsx`
 - `mobile/features/booking/seat-map.tsx`
-- `dashboard/src/app/theme.ts`
+- `dashboard/src/styles/theme.ts`
 - `dashboard/src/styles/tokens.css`
-- `dashboard/src/components/ui/status-badges.tsx`
+- `dashboard/src/features/bookings/components/booking-status-badge.tsx`
 
 ## Real snippets to read aloud
 
@@ -58,12 +58,12 @@ The dashboard mirrors token values as CSS variables:
 
 ## What we chose / Why / Trade-offs / When we'd choose differently
 
-| Topic               | What we chose                                                           | Why                                                                    | Trade-offs                                            | Choose differently when                                                         |
-| ------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Mobile styling      | Plain `StyleSheet` with typed constants                                 | Low dependency overhead; easy to search                                | More manual imports than Restyle                      | A design system needs responsive variants and typed scales across many apps     |
-| Dashboard styling   | Mantine theme plus CSS variables in `tokens.css`                        | Mantine components are accessible; CSS Modules can use the same tokens | Must keep TS constants and CSS variables in lock-step | A single CSS-in-JS system may fit a smaller dashboard                           |
-| Dark adaptation     | Brand accent changes from green to `#FF4D5A`                            | Matches requested red dark mode while keeping contrast                 | Red can be confused with errors                       | Danger uses a separate token plus icon/label and unavailable seats use hatching |
-| Reusable components | Shared UI in `mobile/components/ui/` and `dashboard/src/components/ui/` | Consistency and lower review burden                                    | Too-early abstraction can freeze the wrong API        | Keep feature-local until used by at least two features with the same behavior   |
+| Topic               | What we chose                                                       | Why                                                                    | Trade-offs                                            | Choose differently when                                                         |
+| ------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Mobile styling      | Plain `StyleSheet` with typed constants                             | Low dependency overhead; easy to search                                | More manual imports than Restyle                      | A design system needs responsive variants and typed scales across many apps     |
+| Dashboard styling   | Mantine theme plus CSS variables in `tokens.css`                    | Mantine components are accessible; CSS Modules can use the same tokens | Must keep TS constants and CSS variables in lock-step | A single CSS-in-JS system may fit a smaller dashboard                           |
+| Dark adaptation     | Brand accent changes from green to `#FF4D5A`                        | Matches requested red dark mode while keeping contrast                 | Red can be confused with errors                       | Danger uses a separate token plus icon/label and unavailable seats use hatching |
+| Reusable components | Shared UI in `mobile/components/ui/` and `dashboard/src/shared/ui/` | Consistency and lower review burden                                    | Too-early abstraction can freeze the wrong API        | Keep feature-local until used by at least two features with the same behavior   |
 
 ## Do / Don't examples
 
@@ -95,7 +95,7 @@ danger: { background: colors.dangerSoft, border: colors.danger, tone: 'danger', 
 1. Open `docs/design-tokens.md` and read the “Keeping states distinguishable from the red brand accent” section.
 2. Open `mobile/constants/colors.ts`; compare `accent`, `danger`, `seatTaken`, `seatSelected` in light and dark.
 3. Open `mobile/components/ui/buttons/button.tsx`; find where loading, disabled opacity, compact size and variants are tokenized.
-4. Open `dashboard/src/app/theme.ts`; show Mantine’s virtual `rail` colour switching between green and red.
+4. Open `dashboard/src/styles/theme.ts`; show Mantine’s virtual `rail` colour switching between green and red.
 5. Open `dashboard/src/styles/tokens.css`; point out CSS Modules use `--rp-*` variables rather than raw hex/px.
 
 ## Discussion questions

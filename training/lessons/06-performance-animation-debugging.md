@@ -20,8 +20,8 @@ Learners can:
 - `mobile/components/ui/display/journey-timeline.tsx`
 - `mobile/hooks/use-api-query.ts`
 - `mobile/libs/seat-layout.ts`
-- `dashboard/src/components/ui/data-table.tsx`
-- `dashboard/src/features/journeys/journeys-page.tsx`
+- `dashboard/src/shared/ui/data-table.tsx`
+- `dashboard/src/features/journeys/components/journeys-view.tsx`
 - `backend/src/journeys/journey-availability.service.ts`
 
 ## Real snippets to read aloud
@@ -98,7 +98,7 @@ if (!pulseSeat || reduceMotion) return;
 2. Identify native elements: `SeatButton`, `Pressable`, labels, disabled taken seats.
 3. Toggle a seat and watch selected seat replacement with one passenger.
 4. Open `use-api-query.ts`; trace focus refetch and interval cleanup.
-5. Open `dashboard/src/components/ui/data-table.tsx`; show density from Redux and min-width CSS variable.
+5. Open `dashboard/src/shared/ui/data-table.tsx`; show density from Redux and min-width CSS variable.
 6. Use Expo dev menu or React DevTools to inspect re-renders if available.
 
 ## Discussion questions

@@ -10,8 +10,8 @@ Read:
 
 - `mobile/hooks/use-journey-search.ts`
 - `mobile/hooks/use-api-query.ts`
-- `dashboard/src/features/journeys/use-journeys.ts`
-- `dashboard/src/features/journeys/journeys-page.tsx`
+- `dashboard/src/features/journeys/api/journey-queries.ts`
+- `dashboard/src/features/journeys/components/journeys-view.tsx`
 
 ## Task
 

@@ -20,9 +20,9 @@ Learners can:
 - `mobile/hooks/use-api-query.ts`
 - `dashboard/src/app/store.ts`
 - `dashboard/src/features/auth/auth-slice.ts`
-- `dashboard/src/features/ui/ui-slice.ts`
+- `dashboard/src/features/preferences/preferences-slice.ts`
 - `dashboard/src/app/query-client.ts`
-- `dashboard/src/features/journeys/use-journeys.ts`
+- `dashboard/src/features/journeys/api/journey-queries.ts`
 
 ## Real snippets to read aloud
 
@@ -102,7 +102,7 @@ onSuccess: () => {
 2. Open `mobile/store/booking-draft-store.ts`; trace `chooseJourney`, `toggleSeat`, `setPassengerCount`, `buildBookingRequest`.
 3. Open `home-screen.tsx`; show selectors and `useShallow` preventing unrelated re-renders.
 4. Open `dashboard/src/app/store.ts`; show persisted `auth` and `ui` slices.
-5. Open `dashboard/src/features/journeys/use-journeys.ts`; identify `useQuery`, `useMutation`, invalidation and notifications.
+5. Open `dashboard/src/features/journeys/api/journey-queries.ts`; identify `useQuery`, `useMutation`, invalidation and notifications.
 
 ## Discussion questions
 
@@ -119,7 +119,7 @@ onSuccess: () => {
 
 ## Debugging task
 
-A learner says: “Changing table density in the dashboard refetched all journeys.” Inspect Redux `ui-slice`, `DataTable` and query keys. The density value should affect only presentation and should not be included in server-state query keys.
+A learner says: “Changing table density in the dashboard refetched all journeys.” Inspect Redux `preferences-slice`, `DataTable` and query keys. The density value should affect only presentation and should not be included in server-state query keys.
 
 ## Code-review activity
 

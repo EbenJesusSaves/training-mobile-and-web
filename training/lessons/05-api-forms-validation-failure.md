@@ -19,9 +19,9 @@ Learners can:
 - `mobile/hooks/use-form.ts`
 - `mobile/hooks/use-async-action.ts`
 - `mobile/app/(app)/checkout.tsx`
-- `dashboard/src/api/client.ts`
-- `dashboard/src/api/errors.ts`
-- `dashboard/src/hooks/use-query-notification.ts`
+- `dashboard/src/shared/api/client.ts`
+- `dashboard/src/shared/api/errors.ts`
+- `dashboard/src/shared/hooks/use-query-notification.ts`
 - `backend/src/common/filters/api-exception.filter.ts`
 - `backend/src/bookings/pricing.ts`
 

@@ -18,8 +18,8 @@ Learners can:
 - `mobile/components/ui/display/status-chip.tsx`
 - `mobile/__tests__/status-chip.test.tsx`
 - `mobile/__tests__/booking-draft-store.test.ts`
-- `dashboard/src/components/ui/status-badges.tsx`
-- `dashboard/src/components/ui/status-badges.test.tsx`
+- `dashboard/src/features/bookings/components/booking-status-badge.tsx`
+- `dashboard/src/features/bookings/components/booking-status-badge.test.tsx`
 - `backend/test/booking-flow.e2e-spec.ts`
 - `.husky/pre-commit`
 - `.husky/commit-msg`
@@ -97,7 +97,7 @@ expect(screen.getByText('Checked in')).toBeTruthy();
 
 1. Turn on a screen reader or inspect accessibility props in code for the seat map.
 2. Show unavailable seats: hatched, disabled, labelled “unavailable”.
-3. Run targeted tests: `yarn --cwd mobile test __tests__/status-chip.test.tsx` and `yarn --cwd dashboard test src/components/ui/status-badges.test.tsx`.
+3. Run targeted tests: `yarn --cwd mobile test __tests__/status-chip.test.tsx` and `yarn --cwd dashboard test src/features/bookings/components/booking-status-badge.test.tsx`.
 4. Open `.husky/commit-msg`; explain allowed conventional commit formats.
 5. Show `scripts/check-all.sh` as the broader release-quality command.
 
