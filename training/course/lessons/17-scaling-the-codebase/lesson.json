@@ -1,0 +1,8 @@
+{
+  "title": "Scaling the codebase",
+  "apps": [
+    "mobile",
+    "dashboard"
+  ],
+  "remove": []
+}

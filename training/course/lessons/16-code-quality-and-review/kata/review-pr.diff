@@ -1,0 +1,184 @@
+From 3f9c2a1d7e4b8a6c5f0e1d2c3b4a59687706f5e4 Mon Sep 17 00:00:00 2001
+From: Kofi Mensah <kofi.mensah@example.com>
+Subject: [PATCH] added book again button and revenue
+
+Passengers asked for a quick way to book the same trip again, so past
+tickets now have a "Book again" button. Operations wanted revenue on the
+bookings page, so there's a revenue card above the table.
+
+Works on my machine. I didn't add tests because it's a small change.
+
+---
+diff --git a/dashboard/src/app/store.ts b/dashboard/src/app/store.ts
+index e78ea60..05af1be 100644
+--- a/dashboard/src/app/store.ts
++++ b/dashboard/src/app/store.ts
+@@ -1,6 +1,7 @@
+ import { configureStore } from '@reduxjs/toolkit';
+ 
+ import { authReducer, type AuthState, initialAuthState, logout } from '../features/auth/auth-slice';
++import { bookingsReducer } from '../features/bookings/bookings-slice';
+ import { initialPreferencesState, preferencesReducer, type PreferencesState } from '../features/preferences/preferences-slice';
+ import { setAuthAccessors } from '../shared/api/client';
+ 
+@@ -28,6 +29,7 @@ export const store = configureStore({
+   reducer: {
+     auth: authReducer,
+     preferences: preferencesReducer,
++    bookings: bookingsReducer,
+   },
+   preloadedState: {
+     auth: persisted?.auth ?? initialAuthState,
+diff --git a/dashboard/src/features/bookings/bookings-slice.ts b/dashboard/src/features/bookings/bookings-slice.ts
+new file mode 100644
+index 0000000..75ab0bd
+--- /dev/null
++++ b/dashboard/src/features/bookings/bookings-slice.ts
+@@ -0,0 +1,16 @@
++import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
++
++import type { BookingDto } from './types';
++
++const bookingsSlice = createSlice({
++  name: 'bookings',
++  initialState: { items: [] as BookingDto[] },
++  reducers: {
++    setBookings: (state, action: PayloadAction<BookingDto[]>) => {
++      state.items = action.payload;
++    },
++  },
++});
++
++export const { setBookings } = bookingsSlice.actions;
++export const bookingsReducer = bookingsSlice.reducer;
+diff --git a/dashboard/src/features/bookings/components/RevenueCard.tsx b/dashboard/src/features/bookings/components/RevenueCard.tsx
+new file mode 100644
+index 0000000..9f63716
+--- /dev/null
++++ b/dashboard/src/features/bookings/components/RevenueCard.tsx
+@@ -0,0 +1,33 @@
++import { Card, Select, Text } from '@mantine/core';
++import { useQuery } from '@tanstack/react-query';
++import { useEffect, useState } from 'react';
++
++import { useAppDispatch } from '../../../app/hooks';
++import { listBookings } from '../api/bookings-api';
++import { setBookings } from '../bookings-slice';
++import type { BookingStatus } from '../types';
++
++export default function RevenueCard() {
++  const dispatch = useAppDispatch();
++  const [status, setStatus] = useState<BookingStatus | ''>('');
++  const { data } = useQuery({
++    queryKey: ['bookings'],
++    queryFn: () => listBookings({ status, pageSize: 500 }),
++    refetchInterval: 5000,
++  });
++
++  useEffect(() => {
++    if (data) dispatch(setBookings(data.items));
++  }, [data, dispatch]);
++
++  const revenue = (data?.items ?? []).reduce((sum, b) => sum + b.totalCents, 0);
++
++  return (
++    <Card padding={18} style={{ background: '#0B1F14' }}>
++      <Select data={['', 'CONFIRMED', 'CANCELLED']} value={status} onChange={(v) => setStatus((v ?? '') as BookingStatus)} />
++      <Text c="#C6F432" fz={32} fw={800}>
++        GH₵ {(revenue / 100).toFixed(2)}
++      </Text>
++    </Card>
++  );
++}
+diff --git a/dashboard/src/features/bookings/components/bookings-view.tsx b/dashboard/src/features/bookings/components/bookings-view.tsx
+index b05abc4..992cebe 100644
+--- a/dashboard/src/features/bookings/components/bookings-view.tsx
++++ b/dashboard/src/features/bookings/components/bookings-view.tsx
+@@ -26,6 +26,7 @@ import { useBookings } from '../api/booking-queries';
+ import type { BookingStatus } from '../types';
+ import { BookingDetailDrawer } from './booking-detail-drawer';
+ import { BookingStatusBadge } from './booking-status-badge';
++import RevenueCard from './RevenueCard';
+ 
+ import styles from './bookings-view.module.css';
+ 
+@@ -65,6 +66,7 @@ export function BookingsView() {
+         title="Bookings"
+         description="Search references, ticket codes, passengers, and contacts. Status changes update journey occupancy after invalidation."
+       />
++      <RevenueCard />
+       <section className={styles.filters} aria-label="Booking filters">
+         <TextInput
+           label="Search"
+diff --git a/mobile/app/(app)/(tabs)/tickets.tsx b/mobile/app/(app)/(tabs)/tickets.tsx
+index b715326..c5d7c64 100644
+--- a/mobile/app/(app)/(tabs)/tickets.tsx
++++ b/mobile/app/(app)/(tabs)/tickets.tsx
+@@ -1,6 +1,7 @@
+ import { useState } from 'react';
+ import { FlatList, StyleSheet, View } from 'react-native';
+ import { router } from 'expo-router';
++import BookAgainButton from '@/components/BookAgainButton';
+ 
+ import { AppText } from '@/components/atomic/app-text';
+ import { Screen } from '@/components/layout/screen';
+@@ -30,7 +31,12 @@ export default function TicketsScreen() {
+       <FlatList
+         data={trips.data ?? []}
+         keyExtractor={(booking) => booking.id}
+-        renderItem={({ item }) => <TripListItem booking={item} onPress={open} />}
++        renderItem={({ item }) => (
++          <View>
++            <TripListItem booking={item} onPress={open} />
++            {scope === 'past' && <BookAgainButton booking={item} />}
++          </View>
++        )}
+         ItemSeparatorComponent={ListSeparator}
+         contentContainerStyle={styles.list}
+         refreshing={trips.isRefreshing}
+diff --git a/mobile/components/BookAgainButton.tsx b/mobile/components/BookAgainButton.tsx
+new file mode 100644
+index 0000000..c9debae
+--- /dev/null
++++ b/mobile/components/BookAgainButton.tsx
+@@ -0,0 +1,40 @@
++import { useState } from 'react';
++import { Alert, Pressable, Text } from 'react-native';
++
++import { bookingsApi } from '@/api/bookings-api';
++import type { Booking } from '@/api/types';
++
++export default function BookAgainButton({ booking }: { booking: Booking }) {
++  const [loading, setLoading] = useState(false);
++
++  const click = async () => {
++    setLoading(true);
++    const segment = booking.segments[0];
++    const total = segment.unitFareCents * booking.passengers.length + 250;
++    try {
++      await bookingsApi.create({
++        tripType: 'ONE_WAY',
++        segments: [
++          {
++            journeyId: segment.journey.id,
++            travelClass: segment.travelClass,
++            direction: 'OUTBOUND',
++            seats: segment.tickets.map((t) => ({ carNumber: t.carNumber, seatNumber: t.seatNumber })),
++          },
++        ],
++        addOns: [],
++        totalCents: total,
++      } as any);
++      Alert.alert('Booked!', `You paid GH₵ ${(total / 100).toFixed(2)}`);
++    } catch (e) {
++      console.log(e);
++    }
++    setLoading(false);
++  };
++
++  return (
++    <Pressable onPress={click} style={{ backgroundColor: '#C6F432', padding: 14, borderRadius: 22, marginTop: 6 }}>
++      <Text style={{ fontWeight: '700', fontSize: 15 }}>{loading ? '...' : 'Book again'}</Text>
++    </Pressable>
++  );
++}

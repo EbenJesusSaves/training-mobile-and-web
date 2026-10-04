@@ -1,0 +1,32 @@
+.grid {
+  display: grid;
+  gap: var(--rp-space-xxl);
+}
+
+.panel {
+  padding: var(--rp-space-xl);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-card);
+  background: var(--rp-surface-raised);
+  box-shadow: var(--rp-shadow-soft);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rp-space-md);
+  margin-bottom: var(--rp-space-lg);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(var(--rp-layout-form-columns), minmax(0, 1fr));
+  gap: var(--rp-space-md);
+}
+
+@media (max-width: $rp-breakpoint-network) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}

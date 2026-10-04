@@ -1,0 +1,49 @@
+.wrapper {
+  overflow: hidden;
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-card);
+  background: var(--rp-surface-raised);
+  box-shadow: var(--rp-shadow-soft);
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+.table {
+  min-width: var(--rp-data-table-min-width, var(--rp-size-search-width));
+}
+
+.table th {
+  color: var(--rp-ink-muted);
+  font-size: var(--rp-font-size-caption);
+  font-weight: var(--rp-font-weight-extra-bold);
+  letter-spacing: var(--rp-letter-spacing-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.table td {
+  color: var(--rp-ink);
+  font-weight: var(--rp-font-weight-medium);
+  vertical-align: top;
+}
+
+.table tr[data-clickable='true'] {
+  cursor: pointer;
+}
+
+.table tr[data-clickable='true']:hover {
+  background: color-mix(in srgb, var(--rp-accent-soft) var(--rp-mix-accent-soft-hover), transparent);
+}
+
+.table td,
+.table th {
+  padding-block: var(--rp-space-lg) !important;
+}
+
+/* Density comes from the nearest [data-table-density] ancestor, set by the dashboard layout. */
+:global([data-table-density='compact']) .table td,
+:global([data-table-density='compact']) .table th {
+  padding-block: var(--rp-space-sm) !important;
+}

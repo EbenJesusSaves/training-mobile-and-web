@@ -1,0 +1,32 @@
+# Development infrastructure for the RailPass training project.
+# `docker compose up -d` starts PostgreSQL (persistent named volume) and Mailpit
+# (a local SMTP inbox used for development password-reset emails).
+name: railpass
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: railpass
+      POSTGRES_PASSWORD: railpass_dev_password
+      POSTGRES_DB: railpass
+    ports:
+      - "5433:5432"
+    volumes:
+      - railpass-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U railpass -d railpass"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "8025:8025" # Web inbox: http://localhost:8025
+      - "1025:1025" # SMTP used by the API
+
+volumes:
+  railpass-postgres:

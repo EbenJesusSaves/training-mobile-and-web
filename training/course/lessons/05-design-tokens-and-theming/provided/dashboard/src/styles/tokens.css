@@ -1,0 +1,233 @@
+/* This file mirrors src/constants/*.ts. Keep token names and values in lock-step with those TS constants. */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('../assets/fonts/PlusJakartaSans_400Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('../assets/fonts/PlusJakartaSans_500Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('../assets/fonts/PlusJakartaSans_600SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('../assets/fonts/PlusJakartaSans_700Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --rp-canvas: #eef2ee;
+  --rp-canvas-glow: #9bd3a8;
+  --rp-surface: #f6f8f6;
+  --rp-surface-raised: #ffffff;
+  --rp-ink: #0b120d;
+  --rp-ink-secondary: #5f6a62;
+  --rp-ink-muted: #8e978f;
+  --rp-line: #e1e6e1;
+  --rp-inverse: #07110a;
+  --rp-inverse-raised: #17301d;
+  --rp-on-inverse: #ffffff;
+  --rp-on-inverse-muted: #8fa394;
+  --rp-accent: #7ee6a0;
+  --rp-accent-strong: #4fcb7b;
+  --rp-on-accent: #0b120d;
+  --rp-accent-soft: #ddf7e6;
+  --rp-danger: #c8372d;
+  --rp-danger-soft: #fdecea;
+  --rp-warning: #b76e00;
+  --rp-seat-taken: #dcdedb;
+  --rp-shadow: 0 22px 60px rgb(7 17 10 / 0.09);
+  --rp-shadow-soft: 0 12px 34px rgb(7 17 10 / 0.08);
+
+  --rp-font-family-primary: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --rp-font-weight-regular: 400;
+  --rp-font-weight-medium: 500;
+  --rp-font-weight-semibold: 600;
+  --rp-font-weight-bold: 700;
+  --rp-font-weight-extra-bold: 800;
+  --rp-font-weight-black: 900;
+  --rp-font-size-caption-tight: 0.68rem;
+  --rp-font-size-caption: 0.72rem;
+  --rp-font-size-caption-large: 0.78rem;
+  --rp-font-size-body: 15px;
+  --rp-font-size-body-strong: 16px;
+  --rp-font-size-heading: 20px;
+  --rp-font-size-panel-title: 1.1rem;
+  --rp-font-size-title: 24px;
+  --rp-font-size-display: 34px;
+  --rp-font-size-kpi: clamp(1.35rem, 2.2vw, 2.2rem);
+  --rp-font-size-page-title: clamp(1.65rem, 3vw, 2.35rem);
+  --rp-font-size-detail-title: clamp(1.6rem, 4vw, 2.35rem);
+  --rp-font-size-login-panel-title: clamp(2rem, 5vw, 3.15rem);
+  --rp-font-size-login-hero-title: clamp(2.6rem, 6vw, 5.6rem);
+  --rp-line-height-caption: 17px;
+  --rp-line-height-body: 21px;
+  --rp-line-height-body-strong: 22px;
+  --rp-line-height-heading: 26px;
+  --rp-line-height-title: 30px;
+  --rp-line-height-display: 40px;
+  --rp-line-height-tight: 1;
+  --rp-line-height-compact: 1.08;
+  --rp-line-height-normal: 1.5;
+  --rp-line-height-hero: 0.94;
+  --rp-letter-spacing-tightest: -0.07em;
+  --rp-letter-spacing-tighter: -0.055em;
+  --rp-letter-spacing-tight: -0.05em;
+  --rp-letter-spacing-heading: -0.04em;
+  --rp-letter-spacing-subtle: -0.02em;
+  --rp-letter-spacing-label: 0.04em;
+
+  --rp-space-xxs: 3px;
+  --rp-space-xs: 4px;
+  --rp-space-sm: 8px;
+  --rp-space-md: 12px;
+  --rp-space-lg: 16px;
+  --rp-space-xl: 20px;
+  --rp-space-xxl: 24px;
+  --rp-space-xxxl: 32px;
+  --rp-space-huge: 40px;
+  --rp-space-page-x: clamp(0.875rem, 2.2vw, 1.5rem);
+  --rp-space-page-x-mobile: 0.85rem;
+  --rp-space-auth-gap: clamp(1rem, 3vw, 3rem);
+  --rp-space-auth-padding: clamp(1rem, 4vw, 3rem);
+  --rp-space-auth-hero-padding: clamp(1.5rem, 4vw, 3rem);
+  --rp-space-auth-logo-margin: clamp(3rem, 8vw, 7rem);
+  --rp-space-auth-panel-padding: clamp(1.25rem, 4vw, 2.4rem);
+
+  --rp-radius-xs: 8px;
+  --rp-radius-sm: 12px;
+  --rp-radius-md: 16px;
+  --rp-radius-lg: 20px;
+  --rp-radius-ticket: 22px;
+  --rp-radius-card: 24px;
+  --rp-radius-journey: 28px;
+  --rp-radius-modal: 30px;
+  --rp-radius-shell: 32px;
+  --rp-radius-pill: 999px;
+
+  --rp-line-width: 1px;
+  --rp-line-width-strong: 2px;
+  --rp-line-width-focus: 3px;
+  --rp-line-width-art-rail: 4px;
+  --rp-line-width-train-wheel: 5px;
+
+  --rp-size-header-height: 72px;
+  --rp-size-navbar-width: 286px;
+  --rp-size-navbar-brand-min-height: 68px;
+  --rp-size-nav-scroll-offset: 86px;
+  --rp-size-logo-mark: 46px;
+  --rp-size-login-logo-mark: 52px;
+  --rp-size-search-width: 360px;
+  --rp-size-search-input-max-width: 520px;
+  --rp-size-search-viewport-width: 42vw;
+  --rp-size-state-min-height: 220px;
+  --rp-size-state-icon: 54px;
+  --rp-size-seat: 34px;
+  --rp-size-seat-swatch: 18px;
+  --rp-size-timeline-dot: 12px;
+  --rp-size-booking-filter-status-width: 220px;
+  --rp-size-booking-reference-min-width: 160px;
+  --rp-size-booking-search-min: 240px;
+  --rp-size-journey-filter-search-min: 220px;
+  --rp-size-journey-filter-column-min: 150px;
+  --rp-size-overview-aside-min: 320px;
+  --rp-size-journey-aside-width: 360px;
+  --rp-size-auth-panel-width: 510px;
+  --rp-size-auth-hero-column-min: 400px;
+  --rp-size-auth-hero-mobile-min-height: 360px;
+  --rp-size-rail-art-height: 190px;
+  --rp-size-train-width: 360px;
+  --rp-size-train-viewport-width: 62vw;
+  --rp-size-train-height: 84px;
+
+  --rp-layout-full-viewport-height: 100vh;
+  --rp-layout-full: 100%;
+  --rp-layout-mobile-panel-width: calc(100% - var(--rp-space-xxl));
+  --rp-layout-body-min-width: 320px;
+  --rp-layout-content-measure: 68ch;
+  --rp-layout-state-measure: 44ch;
+  --rp-layout-hero-title-measure: 11ch;
+  --rp-layout-hero-text-measure: 48ch;
+  --rp-layout-overview-kpi-columns: 4;
+  --rp-layout-route-grid-columns: 4;
+  --rp-layout-train-windows: 4;
+  --rp-layout-hero-left-ratio: 1.05fr;
+  --rp-layout-hero-right-ratio: 0.95fr;
+  --rp-layout-overview-main-ratio: 1.55fr;
+  --rp-layout-overview-aside-ratio: 0.9fr;
+  --rp-layout-journey-filter-search-ratio: 1.4fr;
+  --rp-layout-form-columns: 2;
+  --rp-layout-car-editor-first: 0.7fr;
+  --rp-layout-car-editor-second: 1fr;
+  --rp-layout-car-editor-third: 0.9fr;
+  --rp-layout-train-rotate: -7deg;
+  --rp-layout-canvas-accent-y: 30%;
+
+  --rp-mix-surface-glass: 92%;
+  --rp-mix-header-canvas: 86%;
+  --rp-mix-accent-soft-hover: 42%;
+  --rp-mix-on-accent-line: 75%;
+  --rp-mix-hero-inverse: 98%;
+  --rp-mix-hero-inverse-raised: 92%;
+  --rp-mix-hero-glow: 55%;
+  --rp-mix-accent-orb: 50%;
+  --rp-mix-rail-border: 72%;
+  --rp-mix-train-body: 10%;
+  --rp-mix-panel-glass: 94%;
+  --rp-mix-state-surface: 78%;
+  --rp-mix-canvas-glow: 38%;
+  --rp-mix-canvas-accent: 16%;
+  --rp-mix-taken-seat: 80%;
+  --rp-mix-button-hover: 92%;
+
+  --rp-opacity-hero-glow: 0.75;
+  --rp-opacity-secondary-track: 0.45;
+  --rp-blur-sm: 14px;
+  --rp-blur-md: 16px;
+  --rp-blur-glow: 18px;
+  --rp-blur-hero: 20px;
+  --rp-motion-reduce-duration: 0.01ms;
+  --rp-z-foreground: 1;
+}
+
+:root[data-mantine-color-scheme='dark'] {
+  --rp-canvas: #0c0b0b;
+  --rp-canvas-glow: #4a1218;
+  --rp-surface: #171515;
+  /* LIVE 05.6 — Fix dark --rp-surface-raised so raised cards are not white. */
+  --rp-surface-raised: #ffffff;
+  --rp-ink: #f6f3f3;
+  --rp-ink-secondary: #b9b1b1;
+  --rp-ink-muted: #847b7b;
+  --rp-line: #2a2626;
+  --rp-inverse: #050404;
+  --rp-inverse-raised: #2a1416;
+  --rp-on-inverse: #ffffff;
+  --rp-on-inverse-muted: #a99595;
+  --rp-accent: #ff4d5a;
+  --rp-accent-strong: #ff6b76;
+  --rp-on-accent: #140405;
+  --rp-accent-soft: #3a1418;
+  --rp-danger: #ffb4a9;
+  --rp-danger-soft: #3b1d1a;
+  --rp-warning: #ffc46b;
+  --rp-seat-taken: #3a3535;
+  --rp-shadow: 0 22px 70px rgb(0 0 0 / 0.38);
+  --rp-shadow-soft: 0 12px 34px rgb(0 0 0 / 0.3);
+}

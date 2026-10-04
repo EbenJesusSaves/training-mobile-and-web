@@ -1,0 +1,13 @@
+{
+  "title": "Navigation & routing",
+  "apps": [
+    "mobile",
+    "dashboard"
+  ],
+  "remove": [
+    "mobile/app/index.tsx",
+    "mobile/prototype/fixtures.ts",
+    "dashboard/src/app/course-playground.tsx",
+    "dashboard/src/prototype"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Auth & sessions on the client",
+  "apps": [
+    "mobile",
+    "dashboard"
+  ],
+  "remove": []
+}

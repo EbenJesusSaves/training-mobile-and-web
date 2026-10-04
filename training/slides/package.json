@@ -1,0 +1,13 @@
+{
+  "name": "railpass-frontend-course-slides",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-deck.mjs",
+    "build:pdf": "node build-handout-pdf.mjs"
+  },
+  "dependencies": {
+    "pptxgenjs": "^4.0.1",
+    "pdfkit": "^0.17.2"
+  }
+}

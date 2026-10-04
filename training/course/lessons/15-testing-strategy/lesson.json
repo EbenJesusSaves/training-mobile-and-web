@@ -1,0 +1,8 @@
+{
+  "title": "Testing strategy",
+  "apps": [
+    "mobile",
+    "dashboard"
+  ],
+  "remove": []
+}

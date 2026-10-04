@@ -1,0 +1,7 @@
+# Conventional commits, as in the team guide: type(scope): description
+pattern='^(feat|fix|docs|style|refactor|perf|test|chore|build|ci|revert)(\([a-z0-9-]+\))?!?: .{3,}'
+if ! head -1 "$1" | grep -Eq "$pattern"; then
+  echo "✖ Commit message must look like: feat(booking): add seat legend"
+  echo "  Allowed types: feat fix docs style refactor perf test chore build ci revert"
+  exit 1
+fi

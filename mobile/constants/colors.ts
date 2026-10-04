@@ -1,0 +1,116 @@
+// Colour tokens. Light mode is a neutral, gradient-free palette with the brand green as the only
+// accent; dark values implement the requested red adaptation. Mirrors docs/design-tokens.md.
+
+const white = '#FFFFFF';
+
+const light = {
+  canvas: '#F5F5F7',
+  surface: '#F0F0F3',
+  surfaceGlass: white,
+  surfaceRaised: white,
+  // Selected segment / chip fill on top of `glassTrack`.
+  controlActive: white,
+  glassTrack: '#E8E8ED',
+  glassChip: white,
+  glassBorder: '#E5E5EA',
+  ink: '#111113',
+  inkSecondary: '#5C5C66',
+  inkMuted: '#8E8E96',
+  line: '#E5E5EA',
+  inverse: '#111113',
+  inverseRaised: '#1E1E22',
+  onInverse: white,
+  onInverseMuted: '#9A9AA3',
+  onInverseGlass: 'rgba(255,255,255,0.12)',
+  onInverseSubtle: 'rgba(255,255,255,0.08)',
+  onInverseTrack: 'rgba(255,255,255,0.25)',
+  accent: '#7EE6A0',
+  accentStrong: '#4FCB7B',
+  onAccent: '#0B120D',
+  accentSoft: '#E3F7EA',
+  // Accent for text on light surfaces: the pale brand green fails contrast as text.
+  accentText: '#1E8449',
+  danger: '#C8372D',
+  dangerSoft: '#FDECEA',
+  warning: '#B76E00',
+  warningSoft: '#FFF4DD',
+  info: '#2F6FDB',
+  infoSoft: '#E6EEFC',
+  tabInactive: '#A1A1AA',
+  carBody: '#E6E6EA',
+  carInterior: '#F2F2F4',
+  seatCompartment: '#F5F5F7',
+  seatTaken: '#DEDEE2',
+  seatHatch: '#D2D2D7',
+  seatHatchBackground: '#EBEBEE',
+  seatSelected: '#111113',
+  onSeatSelected: white,
+  ticketCanvas: '#111113',
+  ticketStack: '#55555C',
+  overlay: 'rgba(0,0,0,0.4)',
+  transparent: 'transparent',
+} as const;
+
+export type ColorToken = keyof typeof light;
+export type ThemeColors = Record<ColorToken, string>;
+
+const dark: ThemeColors = {
+  canvas: '#0C0B0B',
+  surface: '#171515',
+  surfaceGlass: '#1F1C1C',
+  surfaceRaised: '#1F1C1C',
+  controlActive: '#2E2A2A',
+  glassTrack: '#171515',
+  glassChip: '#1F1C1C',
+  glassBorder: '#2A2626',
+  ink: '#F6F3F3',
+  inkSecondary: '#B9B1B1',
+  inkMuted: '#847B7B',
+  line: '#2A2626',
+  inverse: '#050404',
+  inverseRaised: '#2A1416',
+  onInverse: white,
+  onInverseMuted: '#A99595',
+  onInverseGlass: 'rgba(255,255,255,0.12)',
+  onInverseSubtle: 'rgba(255,255,255,0.08)',
+  onInverseTrack: 'rgba(255,255,255,0.25)',
+  accent: '#FF4D5A',
+  accentStrong: '#FF6B76',
+  onAccent: '#140405',
+  accentSoft: '#3A1418',
+  accentText: '#FF6B76',
+  danger: '#FFB4A9',
+  dangerSoft: '#3B1D1A',
+  warning: '#FFC46B',
+  warningSoft: '#33270F',
+  info: '#9CC0FF',
+  infoSoft: '#16233A',
+  tabInactive: '#847B7B',
+  carBody: '#262222',
+  carInterior: '#171515',
+  seatCompartment: '#1B1919',
+  seatTaken: '#3A3535',
+  seatHatch: '#4A4444',
+  seatHatchBackground: '#2C2828',
+  // White on dark keeps the selected seat obvious next to red "available" seats.
+  seatSelected: '#F6F3F3',
+  onSeatSelected: '#0C0B0B',
+  ticketCanvas: '#0C0B0B',
+  ticketStack: '#3B3434',
+  overlay: 'rgba(0,0,0,0.6)',
+  transparent: 'transparent',
+};
+
+export const palettes = { light: light as ThemeColors, dark } as const;
+
+/** The paper ticket is black-on-white in both themes (and in the PDF) so it always scans. */
+export const ticketColors = {
+  paper: white,
+  ink: '#0B120D',
+  muted: '#8E978F',
+  perforation: '#D9DDD9',
+  dash: '#9AA19B',
+  void: '#C8372D',
+  voidSoft: '#FDECEA',
+  brand: '#4FCB7B',
+} as const;

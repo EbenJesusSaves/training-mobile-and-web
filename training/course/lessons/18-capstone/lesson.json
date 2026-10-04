@@ -1,0 +1,10 @@
+{
+  "title": "Capstone: ship a feature end to end",
+  "apps": [
+    "mobile",
+    "dashboard"
+  ],
+  "remove": [
+    "mobile/prototype"
+  ]
+}

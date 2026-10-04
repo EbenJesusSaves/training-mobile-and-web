@@ -1,0 +1,10 @@
+.chartSummary {
+  margin-bottom: var(--rp-space-lg);
+}
+
+.chartTotal {
+  color: var(--rp-ink);
+  font-size: var(--rp-font-size-kpi);
+  font-weight: var(--rp-font-weight-extra-bold);
+  letter-spacing: var(--rp-letter-spacing-tight);
+}

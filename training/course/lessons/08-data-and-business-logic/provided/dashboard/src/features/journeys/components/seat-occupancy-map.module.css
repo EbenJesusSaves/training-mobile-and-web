@@ -1,0 +1,88 @@
+.cars {
+  display: grid;
+  gap: var(--rp-space-xl);
+}
+
+.car {
+  padding: var(--rp-space-xl);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-ticket);
+  background: var(--rp-surface-raised);
+}
+
+.carHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--rp-space-md);
+  margin-bottom: var(--rp-space-lg);
+}
+
+.compartments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rp-space-md);
+}
+
+.compartment {
+  display: grid;
+  grid-template-columns: repeat(var(--rp-layout-form-columns), var(--rp-size-seat));
+  gap: var(--rp-space-sm);
+  padding: var(--rp-space-md);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-md);
+  background: var(--rp-surface);
+}
+
+.seat {
+  display: grid;
+  width: var(--rp-size-seat);
+  height: var(--rp-size-seat);
+  place-items: center;
+  border: 0;
+  border-radius: var(--rp-radius-sm);
+  color: var(--rp-on-accent);
+  background: var(--rp-accent);
+  font-size: var(--rp-font-size-caption-large);
+  font-weight: var(--rp-font-weight-extra-bold);
+  cursor: pointer;
+}
+
+.seat[data-taken='true'] {
+  color: var(--rp-ink-muted);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--rp-seat-taken) var(--rp-mix-taken-seat), transparent) 0 var(--rp-space-xs),
+      transparent var(--rp-space-xs) var(--rp-space-sm)
+    ),
+    var(--rp-seat-taken);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rp-space-md);
+  margin-top: var(--rp-space-lg);
+  color: var(--rp-ink-secondary);
+  font-size: var(--rp-font-size-caption-large);
+  font-weight: var(--rp-font-weight-bold);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rp-space-sm);
+}
+
+.swatch {
+  width: var(--rp-size-seat-swatch);
+  height: var(--rp-size-seat-swatch);
+  border-radius: var(--rp-radius-xs);
+  background: var(--rp-accent);
+}
+
+.swatchTaken {
+  background:
+    repeating-linear-gradient(135deg, var(--rp-seat-taken) 0 var(--rp-space-xs), transparent var(--rp-space-xs) var(--rp-space-sm)),
+    var(--rp-seat-taken);
+}

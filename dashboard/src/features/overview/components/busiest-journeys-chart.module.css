@@ -1,0 +1,35 @@
+.legend {
+  display: grid;
+  gap: var(--rp-space-xs);
+  margin: var(--rp-space-lg) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: grid;
+  grid-template-columns: var(--rp-size-timeline-dot) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--rp-space-sm);
+  padding: var(--rp-space-sm) var(--rp-space-md);
+  border-radius: var(--rp-radius-md);
+  color: inherit;
+  text-decoration: none;
+}
+
+.legendItem:hover,
+.legendItem:focus-visible {
+  background: var(--rp-accent-soft);
+}
+
+.legendText {
+  display: grid;
+  min-width: 0;
+}
+
+.swatch {
+  width: var(--rp-size-timeline-dot);
+  height: var(--rp-size-timeline-dot);
+  border-radius: var(--rp-radius-pill);
+  background: var(--rp-swatch);
+}

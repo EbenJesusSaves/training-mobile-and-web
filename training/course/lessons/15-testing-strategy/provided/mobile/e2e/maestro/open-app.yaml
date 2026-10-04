@@ -1,0 +1,23 @@
+# Subflow: open the project in Expo Go. Handles iOS's "Open in Expo Go?" prompt and
+# Expo Go's one-time developer-menu introduction.
+appId: host.exp.Exponent
+---
+- launchApp
+- openLink: ${EXPO_URL}
+- repeat:
+    times: 3
+    commands:
+      - runFlow:
+          when:
+            visible: 'Open'
+          commands:
+            - tapOn: 'Open'
+      - runFlow:
+          when:
+            visible: 'Continue'
+          commands:
+            - tapOn: 'Continue'
+      - waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: '(?s).*(Login to Access Your|Book Tickets|Intercity trains|Skip).*'
+    timeout: 120000

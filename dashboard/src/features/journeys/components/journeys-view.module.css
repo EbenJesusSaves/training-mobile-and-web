@@ -1,0 +1,37 @@
+.filters {
+  display: grid;
+  grid-template-columns: minmax(var(--rp-size-journey-filter-search-min), var(--rp-layout-journey-filter-search-ratio)) repeat(
+      var(--rp-layout-route-grid-columns),
+      minmax(var(--rp-size-journey-filter-column-min), 1fr)
+    );
+  gap: var(--rp-space-md);
+  margin-bottom: var(--rp-space-lg);
+  padding: var(--rp-space-lg);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-card);
+  background: var(--rp-surface-raised);
+  box-shadow: var(--rp-shadow-soft);
+}
+
+.routeCell {
+  display: grid;
+  gap: var(--rp-space-xxs);
+}
+
+.actionsRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--rp-space-lg);
+}
+
+@media (max-width: $mantine-breakpoint-lg) {
+  .filters {
+    grid-template-columns: repeat(var(--rp-layout-form-columns), minmax(0, 1fr));
+  }
+}
+
+@media (max-width: $rp-breakpoint-mobile-wide) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}

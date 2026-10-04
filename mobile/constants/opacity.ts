@@ -1,0 +1,17 @@
+export const opacity = {
+  hidden: 0,
+  rippleRest: 0.12,
+  invalidBarcode: 0.18,
+  glowFaint: 0.25,
+  disabledStrong: 0.35,
+  rippleFade: 0.38,
+  disabled: 0.45,
+  unavailable: 0.5,
+  skeletonMin: 0.55,
+  hatchLegend: 0.6,
+  pressedStrong: 0.7,
+  pulse: 0.8,
+  pressed: 0.85,
+  pressedLight: 0.9,
+  full: 1,
+} as const;

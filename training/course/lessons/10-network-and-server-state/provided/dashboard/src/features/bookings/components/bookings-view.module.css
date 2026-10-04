@@ -1,0 +1,22 @@
+.filters {
+  display: grid;
+  grid-template-columns: minmax(var(--rp-size-booking-search-min), 1fr) var(--rp-size-booking-filter-status-width);
+  gap: var(--rp-space-md);
+  margin-bottom: var(--rp-space-lg);
+  padding: var(--rp-space-lg);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-card);
+  background: var(--rp-surface-raised);
+  box-shadow: var(--rp-shadow-soft);
+}
+
+@media (max-width: $rp-breakpoint-mobile-wide) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}
+
+.referenceCell {
+  min-width: var(--rp-size-booking-reference-min-width);
+  white-space: nowrap;
+}

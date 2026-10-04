@@ -1,0 +1,52 @@
+.detail {
+  display: grid;
+  gap: var(--rp-space-xl);
+}
+
+.card {
+  padding: var(--rp-space-lg);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-lg);
+  background: var(--rp-surface);
+}
+
+.segment {
+  display: grid;
+  gap: var(--rp-space-md);
+  padding: var(--rp-space-lg);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-lg);
+  background: var(--rp-surface-raised);
+}
+
+.ticketGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--rp-size-journey-filter-column-min), 1fr));
+  gap: var(--rp-space-sm);
+}
+
+.ticket {
+  padding: var(--rp-space-md);
+  border-radius: var(--rp-radius-md);
+  background: var(--rp-accent-soft);
+}
+
+.timeline {
+  display: grid;
+  gap: var(--rp-space-md);
+}
+
+.timelineItem {
+  display: grid;
+  grid-template-columns: var(--rp-size-timeline-dot) 1fr;
+  gap: var(--rp-space-md);
+  color: var(--rp-ink-secondary);
+}
+
+.dot {
+  width: var(--rp-size-timeline-dot);
+  height: var(--rp-size-timeline-dot);
+  margin-top: var(--rp-space-xs);
+  border-radius: var(--rp-radius-pill);
+  background: var(--rp-accent-strong);
+}

@@ -1,0 +1,24 @@
+# Subflow: finish onboarding if it is showing, then sign in with ${EMAIL} / ${PASSWORD}.
+appId: host.exp.Exponent
+---
+- runFlow:
+    when:
+      visible: 'Skip'
+    commands:
+      - tapOn: 'Skip'
+- runFlow:
+    when:
+      visible: 'Login'
+    commands:
+      - tapOn:
+          id: 'email-input'
+      - inputText: ${EMAIL}
+      - tapOn:
+          id: 'password-input'
+      - inputText: ${PASSWORD}
+      - hideKeyboard
+      - tapOn:
+          id: 'login-button'
+- extendedWaitUntil:
+    visible: 'Book Tickets'
+    timeout: 30000

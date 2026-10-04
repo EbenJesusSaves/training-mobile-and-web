@@ -1,0 +1,51 @@
+# End-to-end: search → class → seat → extras → review → simulated payment → ticket → PDF.
+# Run from mobile/: maestro test -e EXPO_URL=exp://<lan-ip>:8081 -e EMAIL=kwame@railpass.dev \
+#   -e PASSWORD='Passenger#2026' -e FROM='Accra Central' -e TO='Kumasi Central' -e OUT=../.artifacts/mobile e2e/maestro/book-one-way.yaml
+appId: host.exp.Exponent
+---
+- runFlow: open-app.yaml
+- runFlow: sign-in.yaml
+- tapOn: 'One Way'
+- tapOn: 'From: .*'
+- tapOn: '${FROM}, .*'
+- tapOn: 'To: .*'
+- tapOn: '${TO}, .*'
+# Tomorrow's chip (index 1) so the result list always has future departures.
+- tapOn:
+    text: "(Mon|Tue|Wed|Thu|Fri|Sat|Sun) \\d+ \\w+"
+    index: 1
+- extendedWaitUntil:
+    visible: '1st Class, .*'
+    timeout: 30000
+- takeScreenshot: ${OUT}/flow-01-results
+- tapOn:
+    text: '1st Class, .*'
+    index: 0
+- extendedWaitUntil:
+    visible: "Seat \\d+, .* side, available"
+    timeout: 30000
+- tapOn:
+    text: "Seat \\d+, .* side, available"
+    index: 0
+- takeScreenshot: ${OUT}/flow-02-seat-selected
+- scrollUntilVisible:
+    element: 'Extra Luggage.*'
+- tapOn: 'Extra Luggage.*'
+- tapOn: 'Buy Ticket'
+- extendedWaitUntil:
+    visible: 'Confirm & Pay'
+    timeout: 30000
+- takeScreenshot: ${OUT}/flow-03-checkout
+- tapOn: 'Confirm & Pay'
+- extendedWaitUntil:
+    visible: 'You.re booked!'
+    timeout: 30000
+- takeScreenshot: ${OUT}/flow-04-confirmed
+- tapOn: 'View ticket'
+- extendedWaitUntil:
+    visible: 'Download PDF'
+    timeout: 30000
+- takeScreenshot: ${OUT}/flow-05-ticket
+- tapOn: 'Download PDF'
+- waitForAnimationToEnd
+- takeScreenshot: ${OUT}/flow-06-pdf-share-sheet

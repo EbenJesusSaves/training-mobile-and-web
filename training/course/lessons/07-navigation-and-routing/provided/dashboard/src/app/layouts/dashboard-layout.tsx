@@ -1,0 +1,79 @@
+// Course version (lesson 07) — becomes the full RailPass version in lesson 12.
+
+import { AppShell, Burger, Button, NavLink, ScrollArea, Text } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconCalendarStats, IconPackage, IconRoute, IconSearch, IconTicket, IconTrain, IconUsers } from '@tabler/icons-react';
+import { Link, Outlet, useNavigate } from 'react-router';
+
+import { breakpointKeys, componentSizeKeys, componentSizes, iconSizes, spacingKeys } from '../../shared/constants';
+
+import styles from './dashboard-layout.module.css';
+
+const navItems = [
+  { label: 'Overview', path: '/', icon: IconCalendarStats },
+  { label: 'Journeys', path: '/journeys', icon: IconTrain },
+  { label: 'Stations & Routes', path: '/network', icon: IconRoute },
+  { label: 'Bookings', path: '/bookings', icon: IconTicket },
+  { label: 'Passengers', path: '/passengers', icon: IconUsers },
+  { label: 'Extras & Fares', path: '/extras', icon: IconPackage },
+];
+
+export function DashboardLayout() {
+  const [opened, { toggle, close }] = useDisclosure();
+  const navigate = useNavigate();
+
+  return (
+    <AppShell
+      header={{ height: componentSizes.headerHeight }}
+      navbar={{ width: componentSizes.navbarWidth, breakpoint: breakpointKeys.md, collapsed: { mobile: !opened } }}
+      padding={0}
+    >
+      <AppShell.Header className={styles.header}>
+        <div className={styles.headerInner}>
+          <Burger
+            opened={opened}
+            onClick={toggle}
+            hiddenFrom={breakpointKeys.md}
+            size={componentSizeKeys.sm}
+            aria-label="Toggle navigation"
+          />
+          <Button variant="default" leftSection={<IconSearch size={iconSizes.md} />} onClick={() => navigate('/bookings')}>
+            Search bookings, tickets, passengers
+          </Button>
+        </div>
+      </AppShell.Header>
+      <AppShell.Navbar className={styles.navbar}>
+        <div className={styles.brand}>
+          <IconTrain size={iconSizes.train} />
+          <Text fw={800}>RailPass Ops</Text>
+        </div>
+        <ScrollArea className={styles.navScroll}>
+          <nav className={styles.navList} aria-label="Main navigation">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              // LIVE 07.6 — Use location state to mark the active navigation item.
+              const active = false;
+              return (
+                <NavLink
+                  key={item.path}
+                  component={Link}
+                  to={item.path}
+                  label={item.label}
+                  leftSection={<Icon size={iconSizes.xl} />}
+                  active={active}
+                  onClick={close}
+                />
+              );
+            })}
+          </nav>
+          <div className={styles.navFooter}>
+            <Text size="sm">Training data is seeded and safe to edit.</Text>
+          </div>
+        </ScrollArea>
+      </AppShell.Navbar>
+      <AppShell.Main className={styles.main} p={spacingKeys.lg}>
+        <Outlet />
+      </AppShell.Main>
+    </AppShell>
+  );
+}

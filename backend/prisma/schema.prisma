@@ -1,0 +1,269 @@
+// RailPass data model.
+// Money is stored in minor units (pesewas for GHS) as integers to avoid floating point errors.
+// Times are stored in UTC. The sample network runs on GMT (Africa/Accra, UTC+0).
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  PASSENGER
+  STAFF
+}
+
+enum TravelClass {
+  FIRST
+  SECOND
+}
+
+enum JourneyStatus {
+  SCHEDULED
+  DELAYED
+  CANCELLED
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CHECKED_IN
+  CANCELLED
+}
+
+enum TripType {
+  ONE_WAY
+  ROUND_TRIP
+}
+
+enum SegmentDirection {
+  OUTBOUND
+  RETURN
+}
+
+model User {
+  id             String               @id @default(uuid())
+  email          String               @unique
+  passwordHash   String
+  fullName       String
+  phone          String?
+  role           Role                 @default(PASSENGER)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  bookings       Booking[]
+  passwordResets PasswordResetToken[]
+
+  @@map("users")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeHash  String
+  attempts  Int       @default(0)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model Station {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  city      String
+  address   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  departures Route[] @relation("RouteOrigin")
+  arrivals   Route[] @relation("RouteDestination")
+
+  @@map("stations")
+}
+
+/// A pair of stations that trains run between. Default fares are copied onto new journeys.
+model Route {
+  id                          String   @id @default(uuid())
+  originId                    String
+  destinationId               String
+  origin                      Station  @relation("RouteOrigin", fields: [originId], references: [id])
+  destination                 Station  @relation("RouteDestination", fields: [destinationId], references: [id])
+  distanceKm                  Int
+  defaultFirstClassFareCents  Int
+  defaultSecondClassFareCents Int
+  isActive                    Boolean  @default(true)
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+
+  journeys Journey[]
+
+  @@unique([originId, destinationId])
+  @@map("routes")
+}
+
+/// One scheduled departure of a train on a route.
+model Journey {
+  id                   String        @id @default(uuid())
+  routeId              String
+  route                Route         @relation(fields: [routeId], references: [id])
+  serviceCode          String
+  trainNumber          String
+  trainName            String
+  departureAt          DateTime
+  arrivalAt            DateTime
+  status               JourneyStatus @default(SCHEDULED)
+  delayMinutes         Int           @default(0)
+  firstClassFareCents  Int
+  secondClassFareCents Int
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  cars         JourneyCar[]
+  segments     BookingSegment[]
+  reservations SeatReservation[]
+
+  @@index([routeId, departureAt])
+  @@index([departureAt])
+  @@map("journeys")
+}
+
+/// A carriage on a journey. Every car uses the compartment layout: 6 seats per compartment.
+model JourneyCar {
+  id             String      @id @default(uuid())
+  journeyId      String
+  journey        Journey     @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  carNumber      Int
+  travelClass    TravelClass
+  compartments   Int
+  airConditioned Boolean     @default(true)
+
+  @@unique([journeyId, carNumber])
+  @@map("journey_cars")
+}
+
+model AddOn {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String
+  icon        String
+  priceCents  Int
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  bookingAddOns BookingAddOn[]
+
+  @@map("add_ons")
+}
+
+model Booking {
+  id                 String        @id @default(uuid())
+  reference          String        @unique
+  userId             String
+  user               User          @relation(fields: [userId], references: [id])
+  tripType           TripType
+  status             BookingStatus @default(CONFIRMED)
+  contactEmail       String
+  currency           String        @default("GHS")
+  fareTotalCents     Int
+  addOnTotalCents    Int
+  totalCents         Int
+  /// Always "SIMULATED" in this training project. No real payment is taken.
+  paymentMethod      String        @default("SIMULATED")
+  cancelledAt        DateTime?
+  cancellationReason String?
+  checkedInAt        DateTime?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  segments   BookingSegment[]
+  passengers BookingPassenger[]
+  addOns     BookingAddOn[]
+
+  @@index([userId, createdAt])
+  @@index([status])
+  @@map("bookings")
+}
+
+model BookingPassenger {
+  id        String   @id @default(uuid())
+  bookingId String
+  booking   Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  position  Int
+  fullName  String
+  tickets   Ticket[]
+
+  @@unique([bookingId, position])
+  @@map("booking_passengers")
+}
+
+model BookingSegment {
+  id            String           @id @default(uuid())
+  bookingId     String
+  booking       Booking          @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  journeyId     String
+  journey       Journey          @relation(fields: [journeyId], references: [id])
+  direction     SegmentDirection
+  travelClass   TravelClass
+  unitFareCents Int
+  tickets       Ticket[]
+
+  @@unique([bookingId, direction])
+  @@index([journeyId])
+  @@map("booking_segments")
+}
+
+/// One passenger's seat on one segment. Kept after cancellation as a historical record.
+model Ticket {
+  id          String           @id @default(uuid())
+  segmentId   String
+  segment     BookingSegment   @relation(fields: [segmentId], references: [id], onDelete: Cascade)
+  passengerId String
+  passenger   BookingPassenger @relation(fields: [passengerId], references: [id], onDelete: Cascade)
+  carNumber   Int
+  seatNumber  Int
+  ticketCode  String           @unique
+  reservation SeatReservation?
+
+  @@map("tickets")
+}
+
+/// Exists only while a ticket holds its seat. The unique index is what prevents
+/// two bookings from holding the same seat, even when requests arrive concurrently.
+model SeatReservation {
+  id         String   @id @default(uuid())
+  journeyId  String
+  journey    Journey  @relation(fields: [journeyId], references: [id])
+  carNumber  Int
+  seatNumber Int
+  ticketId   String   @unique
+  ticket     Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([journeyId, carNumber, seatNumber])
+  @@map("seat_reservations")
+}
+
+model BookingAddOn {
+  id             String  @id @default(uuid())
+  bookingId      String
+  booking        Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  addOnId        String
+  addOn          AddOn   @relation(fields: [addOnId], references: [id])
+  quantity       Int
+  unitPriceCents Int
+
+  @@unique([bookingId, addOnId])
+  @@map("booking_add_ons")
+}

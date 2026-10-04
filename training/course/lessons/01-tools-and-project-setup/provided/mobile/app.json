@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "RailPass",
+    "slug": "railpass",
+    "scheme": "railpass",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#F5F5F7",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "dev.railpass.training"
+    },
+    "android": {
+      "package": "dev.railpass.training",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B120D",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-secure-store",
+      "expo-sharing",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F5F5F7",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 120,
+          "dark": {
+            "backgroundColor": "#0C0B0B",
+            "image": "./assets/splash-icon.png"
+          }
+        }
+      ],
+      "./plugins/with-local-network-api"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "railpass-training",
+  "private": true,
+  "description": "RailPass: Expo passenger app, Vite operations dashboard and NestJS API for frontend training.",
+  "engines": {
+    "node": "^22.22.0 || >=24.15.0"
+  },
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "prepare": "husky",
+    "infra:up": "docker compose up -d",
+    "infra:down": "docker compose down",
+    "install:all": "yarn --cwd backend install && yarn --cwd dashboard install && yarn --cwd mobile install",
+    "api": "yarn --cwd backend start:dev",
+    "dashboard": "yarn --cwd dashboard dev",
+    "mobile": "yarn --cwd mobile start",
+    "check": "sh scripts/check-all.sh"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}

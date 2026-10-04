@@ -1,0 +1,41 @@
+.form {
+  display: grid;
+  gap: var(--rp-space-xl);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(var(--rp-layout-form-columns), minmax(0, 1fr));
+  gap: var(--rp-space-lg);
+}
+
+.carList {
+  display: grid;
+  gap: var(--rp-space-md);
+}
+
+.carRow {
+  display: grid;
+  grid-template-columns: var(--rp-layout-car-editor-first) var(--rp-layout-car-editor-second) var(--rp-layout-car-editor-third) auto auto;
+  gap: var(--rp-space-md);
+  align-items: end;
+  padding: var(--rp-space-md);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-lg);
+  background: var(--rp-surface);
+}
+
+.summary {
+  padding: var(--rp-space-md) var(--rp-space-lg);
+  border-radius: var(--rp-radius-lg);
+  color: var(--rp-ink-secondary);
+  background: var(--rp-accent-soft);
+  font-weight: var(--rp-font-weight-bold);
+}
+
+@media (max-width: $mantine-breakpoint-sm) {
+  .grid2,
+  .carRow {
+    grid-template-columns: 1fr;
+  }
+}

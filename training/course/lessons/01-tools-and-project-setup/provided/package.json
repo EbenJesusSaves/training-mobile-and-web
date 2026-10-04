@@ -1,0 +1,19 @@
+{
+  "name": "my-railpass",
+  "private": true,
+  "description": "My RailPass: the Expo passenger app and the Vite operations dashboard, built lesson by lesson against the RailPass API.",
+  "engines": {
+    "node": "^22.22.0 || >=24.15.0"
+  },
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "prepare": "husky",
+    "install:all": "yarn install && yarn --cwd dashboard install && yarn --cwd mobile install",
+    "dashboard": "yarn --cwd dashboard dev",
+    "mobile": "yarn --cwd mobile start",
+    "check": "sh scripts/check-all.sh"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}

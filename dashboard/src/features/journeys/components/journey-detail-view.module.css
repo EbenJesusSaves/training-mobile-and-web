@@ -1,0 +1,97 @@
+.headerCard,
+.panel {
+  padding: var(--rp-space-xl);
+  border: var(--rp-line-width) solid var(--rp-line);
+  border-radius: var(--rp-radius-card);
+  background: var(--rp-surface-raised);
+  box-shadow: var(--rp-shadow-soft);
+}
+
+.headerCard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--rp-space-xl);
+  margin-bottom: var(--rp-space-xl);
+}
+
+.title {
+  margin: 0 0 var(--rp-space-sm);
+  font-size: var(--rp-font-size-detail-title);
+  letter-spacing: var(--rp-letter-spacing-tight);
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(var(--rp-layout-route-grid-columns), minmax(0, 1fr));
+  gap: var(--rp-space-md);
+  margin-top: var(--rp-space-xl);
+}
+
+.meta {
+  padding: var(--rp-space-md);
+  border-radius: var(--rp-radius-lg);
+  background: var(--rp-surface);
+}
+
+.meta span {
+  display: block;
+  color: var(--rp-ink-muted);
+  font-size: var(--rp-font-size-caption);
+  font-weight: var(--rp-font-weight-extra-bold);
+  letter-spacing: var(--rp-letter-spacing-label);
+  text-transform: uppercase;
+}
+
+.meta strong {
+  display: block;
+  margin-top: var(--rp-space-xs);
+  color: var(--rp-ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--rp-size-journey-aside-width);
+  gap: var(--rp-space-xl);
+}
+
+.stack {
+  display: grid;
+  gap: var(--rp-space-xl);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--rp-space-md);
+}
+
+.carEdit {
+  display: grid;
+  gap: var(--rp-space-md);
+}
+
+.carEditRow {
+  display: grid;
+  grid-template-columns: var(--rp-layout-car-editor-first) var(--rp-layout-car-editor-second) var(--rp-layout-car-editor-second) auto;
+  gap: var(--rp-space-md);
+  align-items: end;
+}
+
+@media (max-width: $rp-breakpoint-detail) {
+  .grid,
+  .headerCard {
+    grid-template-columns: 1fr;
+  }
+
+  .metaGrid {
+    grid-template-columns: repeat(var(--rp-layout-form-columns), minmax(0, 1fr));
+  }
+}
+
+@media (max-width: $rp-breakpoint-network) {
+  .metaGrid,
+  .formGrid,
+  .carEditRow {
+    grid-template-columns: 1fr;
+  }
+}

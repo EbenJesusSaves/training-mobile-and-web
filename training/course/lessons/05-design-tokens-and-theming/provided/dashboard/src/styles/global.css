@@ -1,0 +1,98 @@
+@layer mantine, app, utilities;
+
+@import '@mantine/core/styles.css' layer(mantine);
+@import '@mantine/charts/styles.css' layer(mantine);
+@import '@mantine/notifications/styles.css' layer(mantine);
+@import './tailwind.css';
+@import './tokens.css' layer(app);
+
+@layer app {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: var(--rp-layout-body-min-width);
+    min-height: var(--rp-layout-full);
+    background: var(--rp-canvas);
+  }
+
+  body {
+    min-width: var(--rp-layout-body-min-width);
+    min-height: var(--rp-layout-full-viewport-height);
+    margin: 0;
+    color: var(--rp-ink);
+    background:
+      radial-gradient(
+        circle at top right,
+        color-mix(in srgb, var(--rp-canvas-glow) var(--rp-mix-canvas-glow), transparent) 0,
+        transparent var(--rp-size-search-width)
+      ),
+      radial-gradient(
+        circle at left var(--rp-layout-canvas-accent-y),
+        color-mix(in srgb, var(--rp-accent) var(--rp-mix-canvas-accent), transparent) 0,
+        transparent var(--rp-size-navbar-width)
+      ),
+      var(--rp-canvas);
+    font-family: var(--rp-font-family-primary);
+    font-size: var(--rp-font-size-body);
+    line-height: var(--rp-line-height-normal);
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  :focus-visible {
+    outline: var(--rp-line-width-focus) solid var(--rp-accent-strong);
+    outline-offset: var(--rp-space-xxs);
+  }
+
+  #root {
+    min-height: var(--rp-layout-full-viewport-height);
+  }
+
+  .mantine-Button-root:not([data-variant]),
+  .mantine-Button-root[data-variant='filled'] {
+    --button-bg: var(--rp-accent);
+    --button-hover: color-mix(in srgb, var(--rp-accent) var(--rp-mix-button-hover), var(--rp-ink));
+    --button-color: var(--rp-on-accent);
+
+    border-color: var(--rp-accent) !important;
+    color: var(--rp-on-accent) !important;
+    background: var(--rp-accent) !important;
+  }
+
+  .mantine-Button-root:not([data-variant]):hover,
+  .mantine-Button-root[data-variant='filled']:hover {
+    color: var(--rp-on-accent) !important;
+    background: var(--button-hover) !important;
+  }
+
+  .mantine-Paper-root,
+  .mantine-Card-root {
+    border-color: var(--rp-line);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: var(--rp-motion-reduce-duration) !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: var(--rp-motion-reduce-duration) !important;
+    }
+  }
+}

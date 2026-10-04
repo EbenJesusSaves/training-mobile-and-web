@@ -1,0 +1,8 @@
+{
+  "title": "Network layer & server state",
+  "apps": [
+    "mobile",
+    "dashboard"
+  ],
+  "remove": []
+}

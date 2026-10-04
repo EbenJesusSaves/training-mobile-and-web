@@ -1,0 +1,8 @@
+{
+  "title": "Tools & project setup",
+  "apps": [
+    "mobile",
+    "dashboard"
+  ],
+  "remove": []
+}

@@ -1,0 +1,34 @@
+.state {
+  display: grid;
+  min-height: var(--rp-size-state-min-height);
+  padding: var(--rp-space-xxxl);
+  place-items: center;
+  border: var(--rp-line-width) dashed var(--rp-line);
+  border-radius: var(--rp-radius-card);
+  color: var(--rp-ink-secondary);
+  background: color-mix(in srgb, var(--rp-surface) var(--rp-mix-state-surface), transparent);
+  text-align: center;
+}
+
+.icon {
+  display: grid;
+  width: var(--rp-size-state-icon);
+  height: var(--rp-size-state-icon);
+  margin-bottom: var(--rp-space-lg);
+  place-items: center;
+  border-radius: var(--rp-radius-lg);
+  color: var(--rp-on-accent);
+  background: var(--rp-accent);
+}
+
+.title {
+  margin: 0;
+  color: var(--rp-ink);
+  font-size: var(--rp-font-size-panel-title);
+  font-weight: var(--rp-font-weight-bold);
+}
+
+.description {
+  max-width: var(--rp-layout-state-measure);
+  margin: var(--rp-space-sm) auto 0;
+}

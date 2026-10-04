@@ -1,0 +1,9 @@
+# Lint and type-check only the apps touched by this commit (fast enough to run on every commit).
+staged=$(git diff --cached --name-only)
+for app in dashboard mobile; do
+  if echo "$staged" | grep -q "^$app/"; then
+    echo "▶ Checking $app"
+    yarn --cwd "$app" --silent lint || exit 1
+    yarn --cwd "$app" --silent typecheck || exit 1
+  fi
+done

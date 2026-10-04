@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Environment files (copy the *.example files instead)
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Expo / React Native
+.expo/
+web-build/
+mobile/ios/
+mobile/android/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# OS / editor
+.DS_Store
+.idea/
+*.log
+npm-debug.log*
+yarn-error.log*
